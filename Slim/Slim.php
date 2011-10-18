@@ -203,7 +203,7 @@ class Slim {
         $this->router = new Slim_Router($this->request);
 
         //Start session if not already started
-        if ( session_id() === '' && php_sapi_name() == 'cli' ) {
+        if ( session_id() === '' && php_sapi_name() != 'cli' ) {
             $sessionHandler = $this->config('session.handler');
             if ( $sessionHandler instanceof Slim_Session_Handler ) {
                 $sessionHandler->register($this);
