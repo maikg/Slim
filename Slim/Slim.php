@@ -879,6 +879,17 @@ class Slim {
     public function urlFor( $name, $params = array() ) {
         return $this->router->urlFor($name, $params);
     }
+    
+    /**
+     * Get the URL relative to the server's root for a named Route.
+     * @param   string          $name       The route name
+     * @param   array           $params     Key-value array of URL parameters
+     * @throws  RuntimeException            If named route does not exist
+     * @return  string
+     */
+    public function relativeUrlFor( $name, $params = array() ) {
+        return $this->router->relativeUrlFor($name, $params);
+    }
 
     /**
      * Redirect

@@ -159,6 +159,17 @@ class Slim_Router implements IteratorAggregate {
      * @return  string                      The URL for the given route populated with the given parameters
      */
     public function urlFor( $name, $params = array() ) {
+      return $this->request->getRootUri() . $this->relativeUrlFor($name, $params);
+    }
+    
+    /**
+     * Get the URI relative to the script's root for a named route.
+     * @param   string              $name   The name of the route
+     * @param   array                       Associative array of URL parameter names and values
+     * @throws  RuntimeException            If named route not found
+     * @return  string                      The URL for the given route populated with the given parameters
+     */
+    public function relativeUrlFor( $name, $params = array() ) {
         if ( !isset($this->namedRoutes[(string)$name]) ) {
             throw new RuntimeException('Named route not found for name: ' . $name);
         }
@@ -173,7 +184,7 @@ class Slim_Router implements IteratorAggregate {
         return preg_replace(array(
             '@\(\/?:.+\/??\)\??@',
             '@\?|\(|\)@'
-        ), '', $this->request->getRootUri() . $pattern);
+        ), '', $pattern);
     }
 
     /**
